@@ -1,0 +1,5 @@
+discord.py==0.16.3
+lxml==4.5.2
+bs4==0.0.1
+requests==2.7.0
+
