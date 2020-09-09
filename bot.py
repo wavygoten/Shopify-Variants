@@ -34,7 +34,6 @@ async def variants(ctx, args):
             lsize += str(size) + "\n"
             value1 ='```' + f"{lsize}" + '```'
 
-        print("\n---------------------\n")
 
         # loop through all variants and prints them
         for variants in products:
