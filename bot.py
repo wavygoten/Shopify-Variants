@@ -50,7 +50,7 @@ async def variants(ctx, args):
     except Exception as e:
        print("Error fetching variants!")
        embed = discord.Embed(title="Shopify Variants", color=0xf09719)
-       embed.add_field(name="`An Error Occured While Fetching Variants!`", inline=True)
+       embed.add_field(name = '`Variants Not Found`',value = "\u200b", inline=True)
        embed.set_footer(text=f"{ctx.message.guild.name} - {ctx.message.author}")
        await ctx.send(embed=embed)
      
