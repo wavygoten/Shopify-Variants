@@ -11,8 +11,8 @@ async def on_ready():
 @client.command()
 async def variants(ctx, args):
     url = args
-    lsize = str(list) + " "
-    lvar = str(list) + " "
+    lsize = str()
+    lvar = str()
 
     try:
         # send request to shopify site and parses html content with lxml
@@ -33,6 +33,14 @@ async def variants(ctx, args):
         pattern = re.compile(r"var meta = (.*?);")
         scripts = soup.find("script", text=pattern, attrs=None).string
         search = pattern.search(scripts)
+        
+            # search for title name
+        title = soup.find('meta', ({ 'name' : 'twitter:title' })).get('content')
+        
+        # keyword filter to find img and access it.
+        # img = soup.find('meta', {'itemprop' : 'image'}).get('content') <- BDGA
+        
+
 
         # convert to json and finds the tuple "product" with the "variants" key inside
         products = json.loads(search.groups()[0]).get('product')['variants']
@@ -40,20 +48,24 @@ async def variants(ctx, args):
         # loop through all sizes and prints them
         for sizes in products:
             size = sizes['public_title']
-            lsize += str(size) + "\n"
-            value1 ='```' + f"{lsize}" + '```'
+            lsize += "\n" + str(size)
+            
+        value1 ='```' + f"{lsize}" + '```'
 
 
         # loop through all variants and prints them
         for variants in products:
             id = variants['id']
-            lvar += str(id) + "\n"
-            value2 ='```' + f"{lvar}" + '```'
+            lvar += "\n" + str(id)
+        
+        
+        value2 ='```' + f"{lvar}" + '```'
 
 
-        embed = discord.Embed(title="Shopify Variants", color=0xf09719)
-        embed.add_field(name="Sizes", value=value1.replace(lsize[0:14],""), inline=True)
-        embed.add_field(name="Variants", value=value2.replace(lvar[0:14], ""), inline=True)
+        embed = discord.Embed(title=title,url=url, color=0xf09719)
+        # embed.set_thumbnail(url='https:' + img)
+        embed.add_field(name="Sizes", value=value1, inline=True)
+        embed.add_field(name="Variants", value=value2, inline=True)
         embed.set_footer(text=f"{ctx.message.guild.name} - {ctx.message.author}")
         await ctx.send(embed=embed)
     except Exception as e:
