@@ -11,7 +11,6 @@ async def on_ready():
 @client.command()
 async def variants(ctx, args):
     url = args
-    variants = ''
     lsize = str(list) + " "
     lvar = str(list) + " "
 
@@ -19,7 +18,17 @@ async def variants(ctx, args):
         # send request to shopify site and parses html content with lxml
         r = requests.get(url)
         soup = BeautifulSoup(r.content, 'lxml')
-
+        #####
+        
+        # if proxies are being used: put proxy between single quotes and remove curly braces.
+        
+        # proxy = '{INSERT-PROXY-HERE}'.split(":")
+        # ip, port, user, passw = proxy[0], proxy[1], proxy[2], proxy[3]
+        # proxyinuse = { "http": "http://{}:{}@{}:{}".format(user, passw, ip, port),
+            #            "https": "https://{}:{}@{}:{}".format(user, passw, ip, port) }
+        # then after url in requests, put proxies=proxy, E.G. -- r = requests.get(url,proxies=proxy)
+        
+        #####
         # keyword filter to find var meta and access the keys inside.
         pattern = re.compile(r"var meta = (.*?);")
         scripts = soup.find("script", text=pattern, attrs=None).string
