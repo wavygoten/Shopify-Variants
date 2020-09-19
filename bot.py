@@ -41,6 +41,9 @@ async def variants(ctx, args):
         # search for image url
         img = soup.find('meta', ({ 'property' : 'og:image'})).get('content')
         
+        # search for price
+        price = soup.find('meta',({ 'property' : 'og:price:amount'})).get('content')
+        
         # keyword filter to find img and access it.
         # img = soup.find('meta', {'itemprop' : 'image'}).get('content') <- BDGA
         
@@ -70,6 +73,7 @@ async def variants(ctx, args):
         embed.set_thumbnail(url=img)
         embed.add_field(name="Sizes", value=value1, inline=True)
         embed.add_field(name="Variants", value=value2, inline=True)
+        embed.add_field(name="Price", value="$" + price, inline=False)
         embed.set_footer(text=f"{ctx.message.guild.name} - {ctx.message.author}")
         await ctx.send(embed=embed)
     except Exception as e:
