@@ -8,7 +8,4 @@ How  To Use:
 2. Send command "-variants {shopify url}"
 3. Your bot should respond with the command outputting the sizes and variants in a nice format. 
 
-TO-DO
-
-Fix the space bug in the first line of sizes and variants.
 
