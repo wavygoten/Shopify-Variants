@@ -36,7 +36,7 @@ async def variants(ctx, args):
         search = pattern.search(scripts)
         
         # search for title name
-        title = soup.find('meta', ({ 'name' : 'og:title' })).get('content')
+        title = soup.find('meta', ({ 'property' : 'og:title' })).get('content')
         
         # search for image url
         img = soup.find('meta', ({ 'property' : 'og:image'})).get('content')
