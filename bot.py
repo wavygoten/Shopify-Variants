@@ -26,7 +26,7 @@ async def variants(ctx, args):
         # ip, port, user, passw = proxy[0], proxy[1], proxy[2], proxy[3]
         # proxyinuse = { "http": "http://{}:{}@{}:{}".format(user, passw, ip, port),
             #            "https": "https://{}:{}@{}:{}".format(user, passw, ip, port) }
-        # then after url in requests, put proxies=proxy, E.G. -- r = requests.get(url,proxies=proxy)
+        # then after url in requests, put proxies=proxy, E.G. -- r = requests.get(url,proxies=proxyinuse)
         
         #####
         # keyword filter to find var meta and access the keys inside.
