@@ -20,13 +20,14 @@ async def variants(ctx, args):
         soup = BeautifulSoup(r.content, 'lxml')
         #####
         
-        # if proxies are being used: put proxy between single quotes and remove curly braces.
+        # # if proxies are being used: put proxy between single quotes and remove curly braces.
         
         # proxy = '{INSERT-PROXY-HERE}'.split(":")
         # ip, port, user, passw = proxy[0], proxy[1], proxy[2], proxy[3]
         # proxyinuse = { "http": "http://{}:{}@{}:{}".format(user, passw, ip, port),
-            #            "https": "https://{}:{}@{}:{}".format(user, passw, ip, port) }
-        # then after url in requests, put proxies=proxy, E.G. -- r = requests.get(url,proxies=proxyinuse)
+        #                "https": "https://{}:{}@{}:{}".format(user, passw, ip, port) }
+            
+        # # then after url in requests, put proxies=proxy, E.G. -- r = requests.get(url,proxies=proxyinuse)
         
         #####
         # keyword filter to find var meta and access the keys inside.
@@ -34,8 +35,11 @@ async def variants(ctx, args):
         scripts = soup.find("script", text=pattern, attrs=None).string
         search = pattern.search(scripts)
         
-            # search for title name
+        # search for title name
         title = soup.find('meta', ({ 'name' : 'twitter:title' })).get('content')
+        
+        # search for image url
+        img = soup.find('meta', ({ 'property' : 'og:image'})).get('content')
         
         # keyword filter to find img and access it.
         # img = soup.find('meta', {'itemprop' : 'image'}).get('content') <- BDGA
@@ -63,7 +67,7 @@ async def variants(ctx, args):
 
 
         embed = discord.Embed(title=title,url=url, color=0xf09719)
-        # embed.set_thumbnail(url='https:' + img)
+        embed.set_thumbnail(url=img)
         embed.add_field(name="Sizes", value=value1, inline=True)
         embed.add_field(name="Variants", value=value2, inline=True)
         embed.set_footer(text=f"{ctx.message.guild.name} - {ctx.message.author}")
