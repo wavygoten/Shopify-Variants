@@ -74,13 +74,13 @@ async def variants(ctx, args):
         embed.add_field(name="Sizes", value=value1, inline=True)
         embed.add_field(name="Variants", value=value2, inline=True)
         embed.add_field(name="Price", value="$" + price, inline=False)
-        embed.set_footer(text=f"{ctx.message.guild.name} - {ctx.message.author}")
+        embed.set_footer(icon_url = f"{ctx.guild.icon_url}", text=f"{ctx.message.guild.name} - {ctx.message.author}")
         await ctx.send(embed=embed)
     except Exception as e:
        print("Error fetching variants!")
        embed = discord.Embed(title="Shopify Variants", color=0xf09719)
        embed.add_field(name = '`Variants Not Found`',value = "\u200b", inline=True)
-       embed.set_footer(text=f"{ctx.message.guild.name} - {ctx.message.author}")
+       embed.set_footer(icon_url = f"{ctx.guild.icon_url}", text=f"{ctx.message.guild.name} - {ctx.message.author}")
        await ctx.send(embed=embed)
      
 client.run(token)
