@@ -43,11 +43,7 @@ async def variants(ctx, args):
         
         # search for price
         price = soup.find('meta',({ 'property' : 'og:price:amount'})).get('content')
-        
-        # keyword filter to find img and access it.
-        # img = soup.find('meta', {'itemprop' : 'image'}).get('content') <- BDGA
-        
-
+            
 
         # convert to json and finds the tuple "product" with the "variants" key inside
         products = json.loads(search.groups()[0]).get('product')['variants']
