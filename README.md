@@ -3,9 +3,9 @@ A simple discord bot that fetches the sizes and variants of any shopify url, and
 
 How  To Use:
 
-0. Please open the command prompt and cd to the directory of this folder E.G. "cd C:\Desktop\Variant-Fetcher-master\" and type in "pip install requirements.txt". YOU MUST DO THIS BEFORE RUNNING THE CODE OR ELSE IT WON'T WORK!
-1. Run bot with bot token inserted into code and with the bot inside the server.
-2. Send command "-variants {shopify url}"
+0. Git clone https://github.com/wavygoten/Shopify-Variants.git // cd Shopify-Variants // PS. Before running bot.py you must edit with an IDE and insert your bot token for it to work.
+1. Run bot with command 'py bot.py'.
+2. Send command "-variants {shopify url}" to the server your bot is in.
 3. Your bot should respond with the command output in a nice format. 
 
 
