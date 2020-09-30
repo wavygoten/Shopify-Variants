@@ -43,16 +43,22 @@ async def variants(ctx, args):
         title = soup.find('meta', ({ 'property' : 'og:title' })).get('content')
         
         # search for image url
-        img = soup.find('meta', ({ 'property' : 'og:image'})).get('content')
+        img = soup.find('meta', ({ 'property' : 'og:image'}))
         
         # search for price
         price = soup.find('meta',({ 'property' : 'og:price:amount'}))
-
+        priceoneness = soup.find('meta',({ 'property' : 'product:price:amount'}))
+        
         if price:
             price = price.get('content')
         else:
-            price = soup.find('meta',({ 'property' : 'product:price:amount'})).get('content')
+            price = priceoneness.get('content')
         
+        
+        if img:
+            img = img.get('content')
+        else:
+            img = ''
         # keyword filter to find img and access it.
         # img = soup.find('meta', {'itemprop' : 'image'}).get('content') <- BDGA
         
@@ -73,10 +79,10 @@ async def variants(ctx, args):
         for variants in products:
             id = variants['id']
             lvar += "\n" + str(id)
-         
+                
         value2 ='```' + f"{lvar}" + '```'
-      
-    
+        
+
         embed = discord.Embed(title=title,url=url, color=0xf09719)
         embed.set_thumbnail(url=img)
         embed.add_field(name="Sizes", value=value1, inline=True)
