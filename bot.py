@@ -40,33 +40,43 @@ async def variants(ctx, args):
         search = pattern.search(scripts)
         
         # search for title name
-        title = soup.find('meta', ({ 'property' : 'og:title' })).get('content')
+        title = ''
+        titlersvp = soup.find('title', attrs=None).string
         
         # search for image url
         img = soup.find('meta', ({ 'property' : 'og:image'}))
         
         # search for price
-        price = soup.find('meta',({ 'property' : 'og:price:amount'}))
-        priceoneness = soup.find('meta',({ 'property' : 'product:price:amount'}))
+        price = ''
+        priceoneness = ''
         
-        if price:
-            price = price.get('content')
-        else:
-            price = priceoneness.get('content')
-        
+        # convert to json and finds the tuple "product" with the "variants" key inside
+        products = json.loads(search.groups()[0]).get('product')['variants']
         
         if img:
             img = img.get('content')
         else:
             img = ''
-        # keyword filter to find img and access it.
-        # img = soup.find('meta', {'itemprop' : 'image'}).get('content') <- BDGA
+
+
+        
+        if titlersvp:
+            title = titlersvp
+        else:
+            title = soup.find('meta', ({ 'name' : 'og:title' })).get('content')
+        
         
 
-
-        # convert to json and finds the tuple "product" with the "variants" key inside
-        products = json.loads(search.groups()[0]).get('product')['variants']
-
+        if price:
+            price = soup.find('meta',({ 'property' : 'og:price:amount'})).get('content')
+        elif price:
+            price = soup.find('meta',({ 'property' : 'product:price:amount'})).get('content')
+        elif price not in soup: 
+            price = (json.loads(search.groups()[0]).get('product')['variants'][0]['price'])/100
+            price = str(price) + '0'
+        else:
+            price = "Can't find"
+            
         # loop through all sizes and prints them
         for sizes in products:
             size = sizes['public_title']
