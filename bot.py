@@ -60,10 +60,10 @@ async def variants(ctx, args):
 
 
         
-        if titlersvp:
+        try:
+            title = soup.find('meta', ({ 'property' : 'og:title' })).get('content')
+        except:
             title = titlersvp
-        else:
-            title = soup.find('meta', ({ 'name' : 'og:title' })).get('content')
         
         
 
