@@ -142,6 +142,22 @@ async def variants(ctx, args):
             embed = discord.Embed(color=0xf09719)
             embed.description = 'URL is not complete'
             await ctx.send(embed=embed)
+        except requests.exceptions.HTTPError as errh:
+            embed = discord.Embed(color=0xf09719)
+            embed.description = ("HTTP Error: ",errh)
+            await ctx.send(embed=embed)
+        except requests.exceptions.ConnectionError as errc:
+            embed = discord.Embed(color=0xf09719)
+            embed.description = ("Error Connecting: ",errc)
+            await ctx.send(embed=embed)
+        except requests.exceptions.Timeout as errt:
+            embed = discord.Embed(color=0xf09719)
+            embed.description = ("Timeout Error: ",errt)
+            await ctx.send(embed=embed)
+        except requests.exceptions.RequestException as err:
+            embed = discord.Embed(color=0xf09719)
+            embed.description = 'Unknown error retrieving variants'
+            await ctx.send(embed=embed)
             
     except:
         r = requests.get(url) 
