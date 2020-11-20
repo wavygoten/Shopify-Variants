@@ -138,7 +138,7 @@ async def variants(ctx, args):
                 embed.add_field(name="Price", value="${}".format(price), inline=False)
                 embed.set_footer(icon_url = f"{ctx.guild.icon_url}", text=f"{ctx.message.guild.name} - {ctx.message.author}")
                 await ctx.send(embed=embed)
-        except MissingSchema:
+        except requests.exceptions.MissingSchema:
             embed = discord.Embed(color=0xf09719)
             embed.description = 'URL is not complete'
             await ctx.send(embed=embed)
