@@ -52,8 +52,6 @@ async def variants(ctx, args):
                 embed.add_field(name="Sizes", value=value1, inline=True)
                 embed.add_field(name="Variants", value=value2, inline=True)
                 embed.add_field(name="Price", value="${}".format(price), inline=False)
-                # embed.add_field(name="Quicktasks", value = '{}\t\t{}'.format(nebula, cyber), inline=False)
-                # embed.add_field(name="Quicktasks", value="Cybersole", url="https://cybersole.io/dashboard/tasks?quicktask=" + {url} + "&properties[mode]=fast", inline=True)
                 embed.set_footer(icon_url = f"{ctx.guild.icon_url}", text=f"{ctx.message.guild.name} - {ctx.message.author}")
                 await ctx.send(embed=embed)
             except:
