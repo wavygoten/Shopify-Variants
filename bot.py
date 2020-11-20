@@ -34,7 +34,10 @@ async def variants(ctx, args):
         
         title = (str(r.get('product')['title']))
         
-        img = (str(r.get('product')['images'][0]['src']))
+        try:
+            img = (str(r.get('product')['images'][0]['src']))
+        except:
+            img = ''
         
         value1 ='```' + f"{lsize}" + '```'
         value2 ='```' + f"{lvar}" + '```'
