@@ -138,9 +138,9 @@ async def variants(ctx, args):
             embed.set_footer(icon_url = f"{ctx.guild.icon_url}", text=f"{ctx.message.guild.name} - {ctx.message.author}")
             await ctx.send(embed=embed)
         except: 
-            embed = discord.Embed(title="Shopify Variants", color=0xf09719)
-            embed.add_field(name = '`Variants Not Found`',value = "\u200b", inline=True)
-            embed.set_footer(icon_url = f"{ctx.guild.icon_url}", text=f"{ctx.message.guild.name} - {ctx.message.author}")
+            r = requests.get(url) 
+            embed = discord.Embed(color=0xf09719)
+            embed.description = str(r.status_code) + ' error retrieving variants'
             await ctx.send(embed=embed)
      
 client.run(token)
