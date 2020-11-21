@@ -144,15 +144,15 @@ async def variants(ctx, args):
             await ctx.send(embed=embed)
         except requests.exceptions.HTTPError as errh:
             embed = discord.Embed(color=0xf09719)
-            embed.description = ("HTTP Error: ",errh)
+            embed.description = ("HTTP Error")
             await ctx.send(embed=embed)
         except requests.exceptions.ConnectionError as errc:
             embed = discord.Embed(color=0xf09719)
-            embed.description = ("Error Connecting: ",errc)
+            embed.description = ("Connection Error")
             await ctx.send(embed=embed)
         except requests.exceptions.Timeout as errt:
             embed = discord.Embed(color=0xf09719)
-            embed.description = ("Timeout Error: ",errt)
+            embed.description = ("Timeout Error")
             await ctx.send(embed=embed)
         except requests.exceptions.RequestException as err:
             embed = discord.Embed(color=0xf09719)
